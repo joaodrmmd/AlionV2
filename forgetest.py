@@ -123,15 +123,19 @@ class MainMenuScreen(Screen):
         yield SelectionList(*options, id="menu")
         yield Static("Developed by r3du0x® 2025", id="dev-footer")
 
-    def on_selection_list_selected(self, event: SelectionList.Selected):
-        tool_id = event.selection_id
-        selected_tool = TOOLS[tool_id]
-        runner_screen = ToolRunnerScreen(
-            tool_name=selected_tool["name"],
-            command_to_run=selected_tool["command"],
-            is_windows_only=selected_tool.get("windows_only", True) # Padrão é True se não especificado
-        )
-        self.app.push_screen(runner_screen)
+    # MÉTODO NOVO E CORRETO
+def on_selection_list_selection_selected(self, event: SelectionList.SelectionSelected):
+    # O ID da seleção agora é acessado através de event.selection.id
+    tool_id = event.selection.id
+    selected_tool = TOOLS[tool_id]
+    
+    # Cria a tela de execução com as informações da ferramenta selecionada
+    runner_screen = ToolRunnerScreen(
+        tool_name=selected_tool["name"],
+        command_to_run=selected_tool["command"],
+        is_windows_only=selected_tool.get("windows_only", True)
+    )
+    self.app.push_screen(runner_screen)
 
 
 # --- Aplicação Principal ---
