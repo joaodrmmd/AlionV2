@@ -125,6 +125,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-print(f"                                   {magenta}║{cyan} Developed by r3du0x® 2025 {magenta}║{cyan} Updated 3th of August (Alpha Ver.) {magenta}║{reset}")
-print("")
